@@ -18,7 +18,7 @@ Redis::Objects.redis = ConnectionPool.new(size: 5, timeout: 5) { Redis.new(url: 
 require './lib/match'
 require './lib/player'
 
-Pusher.url = "http://#{ENV['PUSHER_KEY']}:#{ENV['PUSHER_SECRET']}@api.pusherapp.com/apps/#{ENV['PUSHER_APP']}"
+Pusher.url = "http://2d114d0df3e7b825a420:1dc36e9309d1e22e476c@api.pusherapp.com/apps/11279"
 
 class Scoreboard < Sinatra::Base
 
