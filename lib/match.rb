@@ -4,7 +4,7 @@ class Match
   value :initial_serve
   value :serve
 
-  def initialize(name_one = nil, name_two = nil)
+  def initialize(name_one = "Lexus", name_two = "Porsche")
     @one, @two = Player.new(:one),
                  Player.new(:two)
     @one.name = name_one unless name_one.nil?
@@ -26,10 +26,10 @@ class Match
   def set_serve
     total_points = @one.score.value + @two.score.value
 
-    if @one.score.value >= 10 && @two.score.value >= 10
+    if @one.score.value >= 20 && @two.score.value >= 20
       initial_server = total_points.even?
     else
-      initial_server = (total_points / 2).even?
+      initial_server = (total_points / 5).even?
     end
 
     case self.initial_serve.value
@@ -63,7 +63,12 @@ class Match
   def reset_games
     @one.games.reset
     @two.games.reset
-    set_initial_serve(nil)
+    initial_serve = rand(10).even?
+    if initial_serve
+      set_initial_serve('blue')
+    else
+      set_initial_serve('red')
+    end
   end
 
   def total_games

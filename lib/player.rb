@@ -12,7 +12,7 @@ class Player
   end
 
   def has_beaten(player)
-    self.score.value > 10 && self.score.value > player.score.value + 1
+    self.score.value > 20 && self.score.value > player.score.value + 1
   end
 
   def attributes
