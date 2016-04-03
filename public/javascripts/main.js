@@ -12,11 +12,11 @@ blueScores = function () {
 }
 
 $(function() {
-  $('#reset').on('click', resetScores);
+  $('.action-bar__item__reset').on('click', resetScores);
 })
 $(function() {
-  $('#blue-scores').on('click', blueScores);
+  $('.action-bar__item__blue-score').on('click', blueScores);
 })
 $(function() {
-  $('#red-scores').on('click', redScores);
+  $('.action-bar__item__red-score').on('click', redScores);
 })
