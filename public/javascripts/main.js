@@ -10,13 +10,25 @@ redScores = function () {
 blueScores = function () {
   $.ajax({method: 'PUT', url: '/blue_scores', data: ''});
 }
+redUndo = function () {
+  $.ajax({method: 'PUT', url: '/red_undo', data: ''});
+}
+blueUndo = function () {
+  $.ajax({method: 'PUT', url: '/blue_undo', data: ''});
+}
 
 $(function() {
   $('.action-bar__item__reset').on('click', resetScores);
 })
 $(function() {
-  $('.action-bar__item__blue-score').on('click', blueScores);
+  $('.action-bar__item__blue-score--increment').on('click', blueScores);
 })
 $(function() {
-  $('.action-bar__item__red-score').on('click', redScores);
+  $('.action-bar__item__red-score--increment').on('click', redScores);
+})
+$(function() {
+  $('.action-bar__item__blue-score--decrement').on('click', blueUndo);
+})
+$(function() {
+  $('.action-bar__item__red-score--decrement').on('click', redUndo);
 })

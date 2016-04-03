@@ -2,6 +2,7 @@ body {
   background: black;
   color: white;
   font-family: "Helvetica Neue", "Arial", sans-serif;
+  line-height: 0.8;
 }
 .scores {
   position: absolute;
@@ -57,7 +58,19 @@ body {
 #red-score .serve { right: 5rem; }
 #blue-score .serve { left: 5rem; }
 
-@media (max-width: 470px) {
+@media screen and (max-width: 46rem) {
+  .scores div .games {
+    position: absolute;
+    top: 5rem;
+    font-weight: bold;
+    font-size: 5rem;
+  }
+  .scores div .serve {
+    top: 5rem;
+  }
+  .scores div .serve img {
+    width: 4rem;
+  }
   .action-bar {
     position: absolute;
     bottom: 0;
@@ -75,12 +88,20 @@ body {
     text-align: center;
     background-color: tomato;
   }
-  .action-bar__item__blue-score {
-    width: 35%;
+  .action-bar__item__blue-score--increment {
+    width: 17.5%;
     background-color: dodgerblue;
   }
-  .action-bar__item__red-score {
-    width: 35%;
+  .action-bar__item__blue-score--decrement {
+    width: 17.5%;
+    background-color: dodgerblue;
+  }
+  .action-bar__item__red-score--increment {
+    width: 17.5%;
+    background-color: tomato;
+  }
+  .action-bar__item__red-score--decrement {
+    width: 17.5%;
     background-color: tomato;
   }
   .action-bar__item__reset {
@@ -101,9 +122,36 @@ body {
   #red-score .score { right: 1rem; }
   #blue-score .score { left: 1rem; }
   #red-score .games { right: 1rem; }
+  #red-score .games { left: auto; }
   #blue-score .games { left: 1rem; }
   #red-score .name { right: 1rem; }
   #blue-score .name { left: 1rem; }
-  #red-score .serve { right: 1rem; }
-  #blue-score .serve { left: 1rem; }
+  #red-score .serve { left: 2rem; }
+  #blue-score .serve { right: 2rem; }
+  #blue-score .serve { left: auto; }
+}
+
+@media (min-width: 47rem) and (max-width: 62rem)  {
+  #red-score .score {
+    right: 2rem;
+  }
+  #red-score .name {
+    right: 2rem;
+  }
+  #red-score .serve {
+    right: 2rem;
+  }
+  .scores div .score {
+    font-size: 15rem;
+    bottom: 3rem;
+  }
+  #blue-score .score {
+    left: 2rem;
+  }
+  #blue-score .name {
+    left: 2rem;
+  }
+  #blue-score .serve {
+    left: 2rem;
+  }
 }

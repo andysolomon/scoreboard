@@ -10,6 +10,7 @@ require 'pusher'
 
 require 'redis'
 require 'redis-objects'
+require 'aws-sdk'
 
 require 'connection_pool'
 redis_url = ENV['REDIS_URL']
@@ -27,16 +28,22 @@ class Scoreboard < Sinatra::Base
   end
 
   post '/new_game' do
-    @match = Match.new(params[:one], params[:two])
+    upload
+    teams = ["Lexus", "Porsche", "Ferrari", "Tesla", "BMW", "Mercedes", "Jaguar", "Audi", "Bugatti", "Maserati", "Lamborghini"]
+    newTeams = teams.dup
+    newTeams.delete_at(rand(1..teams.count))
+    name_one = teams[rand(1..teams.count)]
+    name_two = newTeams[rand(1..newTeams.count)]
+    # @match = Match.new(params[:one], params[:two])
+    @match = Match.new(name_one, name_two)
     @match.reset_scores
     @match.reset_games
     push_scores
-    JSON match.scores
+    redirect '/'
   end
 
   put '/reset_scores' do
     match.reset_scores
-    match.reset_games
     push_scores
   end
 
@@ -66,6 +73,20 @@ class Scoreboard < Sinatra::Base
 
   def push_scores
     Pusher['scores'].trigger('update_scores', match.scores.to_json)
+  end
+
+  def upload
+    data_from_json = JSON[File.read("public/temp.json")]
+    data_from_json = [data_from_json] if data_from_json.class != Array
+    File.open("public/temp.json","w") do |f|
+      f.write(JSON.pretty_generate(data_from_json << match.scores))
+    end
+    s3 = AWS::S3.new(
+        :access_key_id => 'AKIAIEOGU4UW4CIPRJHA',
+        :secret_access_key => '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')
+    file_name = "public/temp.json"
+    bucket = s3.buckets['scoreboardlog']
+    puts bucket.objects['history'].write(:file => file_name)
   end
 
   private

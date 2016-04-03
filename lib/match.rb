@@ -4,7 +4,7 @@ class Match
   value :initial_serve
   value :serve
 
-  def initialize(name_one = "Lexus", name_two = "Porsche")
+  def initialize(name_one = nil, name_two = nil)
     @one, @two = Player.new(:one),
                  Player.new(:two)
     @one.name = name_one unless name_one.nil?
