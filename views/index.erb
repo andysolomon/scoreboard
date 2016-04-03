@@ -23,13 +23,15 @@
 <body>
   <scores></scores>
 
-  <div class="controls">
-    <form action="/new_game" method="post">
-      <input type="submit" id="new-game"/>
-    </form>
-    <button id="blue-scores">Blue</button>
-    <button id="reset">Reset</button>
-    <button id="red-scores">Red</button>
+  <div class="action-bar">
+    <div class="action-bar__item__blue-score">1</div>
+    <div class="action-bar__item__reset">2</div>
+    <div class="action-bar__item__new-game">3
+      <form action="/new_game" method="post">
+        <input type="submit" id="new-game"/>
+      </form>
+    </div>
+    <div class="action-bar__item__red-score">4</div>
   </div>
 
   <script src="/tags/scores.tag" type="riot/tag"></script>
