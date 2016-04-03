@@ -29,7 +29,7 @@ class Scoreboard < Sinatra::Base
 
   post '/new_game' do
     upload
-    teams = ["Lexus", "Porsche", "Ferrari", "Tesla", "BMW", "Mercedes", "Jaguar", "Audi", "Bugatti", "Maserati", "Lamborghini"]
+    teams = ["Lexus", "Porsche", "Ferrari", "Tesla", "BMW", "Mercedes", "Jaguar", "Audi", "Bugatti", "Maserati", "Lamborghini", "Subaru"]
     newTeams = teams.dup
     newTeams.delete_at(rand(1..teams.count))
     name_one = teams[rand(1..teams.count)]
@@ -82,10 +82,10 @@ class Scoreboard < Sinatra::Base
       f.write(JSON.pretty_generate(data_from_json << match.scores))
     end
     s3 = AWS::S3.new(
-        :access_key_id => 'AKIAIEOGU4UW4CIPRJHA',
-        :secret_access_key => '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')
+        :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+        :secret_access_key => ENV['AWS_SECRET_KEY'])
     file_name = "public/temp.json"
-    bucket = s3.buckets['scoreboardlog']
+    bucket = s3.buckets[ENV['AWS_BUCKET']]
     puts bucket.objects['history'].write(:file => file_name)
   end
 
