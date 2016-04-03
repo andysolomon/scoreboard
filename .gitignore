@@ -1,3 +1,7 @@
 .env
 
 /dump.rdb
+
+/public/temp.json
+
+/public/.DS_Store

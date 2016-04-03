@@ -12,3 +12,5 @@ gem 'redis-objects'
 gem 'connection_pool'
 
 gem 'puma'
+gem 'aws-s3'
+gem 'aws-sdk', '< 2.0'
