@@ -82,35 +82,48 @@ body {
     background-color: #fff;
   }
   .action-bar > div {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
     text-align: center;
   }
   .action-bar__item {
     text-align: center;
     background-color: tomato;
   }
+  .action-bar img {
+    position: relative;
+    top: 50%;
+    transform: translateY(25%);
+  }
   .action-bar__item__blue-score--increment {
+    text-align: center;
     width: 17.5%;
-    background-color: dodgerblue;
+    background-color: #0073F8;
   }
   .action-bar__item__blue-score--decrement {
+    text-align: center;
     width: 17.5%;
-    background-color: dodgerblue;
+    background-color: #54C7FC;
   }
   .action-bar__item__red-score--increment {
+    text-align: center;
     width: 17.5%;
-    background-color: tomato;
+    background-color: #FF3824;
   }
   .action-bar__item__red-score--decrement {
+    text-align: center;
     width: 17.5%;
-    background-color: tomato;
+    background-color: #FC625D;
   }
   .action-bar__item__reset {
+    text-align: center;
     width: 15%;
-    background-color: palegreen;
+    background-color: #79808E;
   }
   .action-bar__item__new-game {
     width: 15%;
-    background-color: #333;
+    background-color: #050608;
   }
   .controls {
     display: block;

@@ -16,9 +16,15 @@ redUndo = function () {
 blueUndo = function () {
   $.ajax({method: 'PUT', url: '/blue_undo', data: ''});
 }
+newGame = function () {
+  $.ajax({method: 'POST', url: '/new_game', data: '' });
+}
 
 $(function() {
   $('.action-bar__item__reset').on('click', resetScores);
+})
+$(function() {
+  $('.action-bar__item__new-game').on('click', newGame);
 })
 $(function() {
   $('.action-bar__item__blue-score--increment').on('click', blueScores);

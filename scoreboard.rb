@@ -29,10 +29,15 @@ class Scoreboard < Sinatra::Base
 
   post '/new_game' do
     upload
-    teams = ["Lexus", "Porsche", "Ferrari", "Tesla", "BMW", "Mercedes", "Jaguar", "Audi", "Bugatti", "Maserati", "Lamborghini", "Subaru"]
+    teams = ["Lexus", "Porsche", "Ferrari", "Tesla", "BMW", "Mercedes",
+             "Jaguar", "Audi", "Bugatti", "Maserati", "Lamborghini",
+             "Subaru", "Chevrolet", "Bentley", "Fiat", "Nissan",
+             "Pontiac", "Volkswagen", "Acura", "Polaris", "Aston Martin",
+             "Infiniti", "Pagani", "Konigsegg", "Apple Car", "Batmobile"]
+    r1 = rand(1..teams.count)
     newTeams = teams.dup
-    newTeams.delete_at(rand(1..teams.count))
-    name_one = teams[rand(1..teams.count)]
+    newTeams.delete_at(r1)
+    name_one = teams[r1]
     name_two = newTeams[rand(1..newTeams.count)]
     # @match = Match.new(params[:one], params[:two])
     @match = Match.new(name_one, name_two)
