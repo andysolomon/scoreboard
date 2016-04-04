@@ -25,16 +25,12 @@
   <scores></scores>
 
   <div class="action-bar">
-    <div class="action-bar__item__blue-score--increment">+</div>
-    <div class="action-bar__item__blue-score--decrement">-</div>
-    <div class="action-bar__item__reset">R</div>
-    <div class="action-bar__item__new-game">
-      <form action="/new_game" method="post">
-        <button style="height:4rem;width:100%;opacity:0;" type="submit">N</button>
-      </form>
-    </div>
-    <div class="action-bar__item__red-score--decrement">-</div>
-    <div class="action-bar__item__red-score--increment">+</div>
+    <div class="action-bar__item__blue-score--increment"><img src="/images/add.svg" /></div>
+    <div class="action-bar__item__blue-score--decrement"><img src="/images/subtract.svg" /></div>
+    <div class="action-bar__item__reset"><img src="/images/reset.svg" /></div>
+    <div class="action-bar__item__new-game"><img src="/images/play.svg" /></div>
+    <div class="action-bar__item__red-score--decrement"><img src="/images/subtract.svg" /></div>
+    <div class="action-bar__item__red-score--increment"><img src="/images/add.svg" /></div>
   </div>
 
   <script src="/tags/scores.tag" type="riot/tag"></script>
