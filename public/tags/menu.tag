@@ -1,11 +1,14 @@
 <menu>
   <div class="outer-flex">
     <div class="flex">
+      <div class="back">
+        <a href="/"><<a>
+      </div>
       <div class="top-box">
-        <a>Add a player</a>
+        <a href="/add" class="menu-text">Add a player</a>
       </div>
       <div class="bottom-box">
-        <a>Choose a player</a>
+        <a class="menu-text">Choose a player</a>
       </div>
     </div>
   </div>
