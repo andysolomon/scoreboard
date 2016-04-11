@@ -18,6 +18,7 @@ Redis::Objects.redis = ConnectionPool.new(size: 5, timeout: 5) { Redis.new(url: 
 
 require './lib/match'
 require './lib/player'
+require './lib/team'
 
 Pusher.url = "http://2d114d0df3e7b825a420:1dc36e9309d1e22e476c@api.pusherapp.com/apps/11279"
 
@@ -28,7 +29,7 @@ class Scoreboard < Sinatra::Base
   end
 
   post '/new_game' do
-    upload
+    #upload
     teams = ["Lexus", "Porsche", "Ferrari", "Tesla", "BMW", "Mercedes",
              "Jaguar", "Audi", "Bugatti", "Maserati", "Lamborghini",
              "Subaru", "Chevrolet", "Bentley", "Fiat", "Nissan",
@@ -39,7 +40,6 @@ class Scoreboard < Sinatra::Base
     newTeams.delete_at(r1)
     name_one = teams[r1]
     name_two = newTeams[rand(1..newTeams.count)]
-    # @match = Match.new(params[:one], params[:two])
     @match = Match.new(name_one, name_two)
     @match.reset_scores
     @match.reset_games
@@ -76,6 +76,24 @@ class Scoreboard < Sinatra::Base
     JSON match.scores
   end
 
+  get '/menu' do
+    teams = [{name: "a", age: 1}, {name: "b", age: 2}]
+    erb :menu, locals: { list: teams }
+  end
+
+  post '/add_player' do
+    match.reset_scores
+    match.reset_games
+    playerone = params[:add]
+    @teams = Teams.new(playerone)
+    Match.new(@teams.teams[0], @teams.teams[1])
+    redirect '/'
+  end
+
+  get '/add' do
+    erb :add
+  end
+
   def push_scores
     Pusher['scores'].trigger('update_scores', match.scores.to_json)
   end
@@ -95,6 +113,7 @@ class Scoreboard < Sinatra::Base
   end
 
   private
+
 
   def match
     @match ||= Match.new
