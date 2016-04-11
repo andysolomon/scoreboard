@@ -34,7 +34,7 @@ class Scoreboard < Sinatra::Base
              "Jaguar", "Audi", "Bugatti", "Maserati", "Lamborghini",
              "Subaru", "Chevrolet", "Bentley", "Fiat", "Nissan",
              "Pontiac", "Volkswagen", "Acura", "Polaris", "Aston Martin",
-             "Infiniti", "Pagani", "Konigsegg", "Apple Car", "Batmobile"]
+             "Infiniti", "Pagani", "Konigsegg", "Apple Car", "Batmobile", "Alfa Romero"]
     r1 = rand(1..teams.count)
     newTeams = teams.dup
     newTeams.delete_at(r1)
@@ -43,6 +43,8 @@ class Scoreboard < Sinatra::Base
     @match = Match.new(name_one, name_two)
     @match.reset_scores
     @match.reset_games
+    @teams = Teams.new
+    @teams.teams.clear
     push_scores
     redirect '/'
   end
@@ -77,16 +79,23 @@ class Scoreboard < Sinatra::Base
   end
 
   get '/menu' do
-    teams = [{name: "a", age: 1}, {name: "b", age: 2}]
-    erb :menu, locals: { list: teams }
+    erb :menu
   end
 
   post '/add_player' do
     match.reset_scores
     match.reset_games
-    playerone = params[:add]
-    @teams = Teams.new(playerone)
-    Match.new(@teams.teams[0], @teams.teams[1])
+    player = params[:add]
+    player = player.rstrip
+    player = player.lstrip
+    @teams = Teams.new(player)
+    if @teams.teams.count > 1
+      Match.new(@teams.teams[0], @teams.teams[1])
+    end
+    if @teams.teams.count == 1
+      Match.new(@teams.teams[0])
+    end
+    push_scores
     redirect '/'
   end
 
@@ -113,7 +122,6 @@ class Scoreboard < Sinatra::Base
   end
 
   private
-
 
   def match
     @match ||= Match.new
