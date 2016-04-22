@@ -38,10 +38,15 @@ Thread.new do |t|
         puts "received chunk: #{chunk}"
         buffer += chunk
         puts "buffer: #{buffer}"
-        if buffer.include?("\n") && buffer.include?("BUTTONPRESS")
-          puts "found button press"
+        if buffer.include?("\n") && buffer.include?("BUTTONPRESS1")
+          puts "found button press one"
           buffer = ''
           HTTParty.put("http://localhost:5000/blue_scores")
+        end
+        if buffer.include?("\n") && buffer.include?("BUTTONPRESS2")
+          puts "found button press two"
+          buffer = ''
+          HTTParty.put("http://localhost:5000/red_scores")
         end
       end
     end
@@ -60,7 +65,7 @@ class Scoreboard < Sinatra::Base
              "Jaguar", "Audi", "Bugatti", "Maserati", "Lamborghini",
              "Subaru", "Chevrolet", "Bentley", "Fiat", "Nissan",
              "Pontiac", "Volkswagen", "Acura", "Polaris", "Aston Martin",
-             "Infiniti", "Pagani", "Konigsegg", "Apple Car", "Batmobile", "Alfa Romero"]
+             "Infiniti", "Pagani", "Koenigsegg", "Apple Car", "Batmobile", "Alfa Romero"]
     r1 = rand(1..teams.count)
     newTeams = teams.dup
     newTeams.delete_at(r1)
