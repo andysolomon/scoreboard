@@ -31,13 +31,9 @@ Thread.new do |t|
   buffer = ''
   Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
     request = Net::HTTP::Get.new uri
-    puts "making request"
     http.request(request) do |response|
-      puts "reading response, begining"
       response.read_body do |chunk|
-        puts "received chunk: #{chunk}"
         buffer += chunk
-        puts "buffer: #{buffer}"
         if buffer.include?("\n") && buffer.include?("BUTTONPRESS1")
           puts "found button press one"
           buffer = ''
