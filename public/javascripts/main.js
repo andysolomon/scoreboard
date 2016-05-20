@@ -17,7 +17,7 @@ blueUndo = function () {
   $.ajax({method: 'PUT', url: '/blue_undo', data: ''});
 }
 newGame = function () {
-  $.ajax({method: 'POST', url: '/new_game', data: '' });
+  $.ajax({method: 'PUT', url: '/new_game', data: '' });
 }
 
 $(function() {

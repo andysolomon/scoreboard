@@ -55,7 +55,7 @@ class Scoreboard < Sinatra::Base
     erb :index, locals: { scores: match.scores }
   end
 
-  post '/new_game' do
+  put '/new_game' do
     #upload
     teams = ["Lexus", "Porsche", "Ferrari", "Tesla", "BMW", "Mercedes",
              "Jaguar", "Audi", "Bugatti", "Maserati", "Lamborghini",
