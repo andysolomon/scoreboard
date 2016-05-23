@@ -22,33 +22,6 @@ require './lib/team'
 
 Pusher.url = "http://2d114d0df3e7b825a420:1dc36e9309d1e22e476c@api.pusherapp.com/apps/11279"
 
-require 'thread'
-require 'net/http'
-require 'httparty'
-Thread.abort_on_exception = true
-Thread.new do |t|
-  uri = URI('https://api.particle.io/v1/devices/events?access_token=d8ffe9eab7bf2047aecd74effb5499c72013e149')
-  buffer = ''
-  Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
-    request = Net::HTTP::Get.new uri
-    http.request(request) do |response|
-      response.read_body do |chunk|
-        buffer += chunk
-        if buffer.include?("\n") && buffer.include?("BUTTONPRESS1")
-          puts "found button press one"
-          buffer = ''
-          HTTParty.put("http://localhost:5000/blue_scores")
-        end
-        if buffer.include?("\n") && buffer.include?("BUTTONPRESS2")
-          puts "found button press two"
-          buffer = ''
-          HTTParty.put("http://localhost:5000/red_scores")
-        end
-      end
-    end
-  end
-end
-
 class Scoreboard < Sinatra::Base
 
   get '/' do
