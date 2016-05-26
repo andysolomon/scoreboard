@@ -20,6 +20,17 @@
 
     channel.bind('update_scores', function(data) {
       this.players = data;
+      var score = "";
+      if (this.players.blue.score >= 20 && this.players.red.score >= 20)
+         score = "change serve!! ";
+      else if ((this.players.blue.score + this.players.red.score) % 5 == 0)
+         score = "change serve!! ";
+      if (this.players.blue.serve) 
+         score = score + this.players.blue.score + " to " + this.players.red.score;
+      else 
+         score = score + this.players.red.score + " to " + this.players.blue.score; 
+      var msg = new SpeechSynthesisUtterance(score);
+      window.speechSynthesis.speak(msg);
       this.update();
     }.bind(this));
 
