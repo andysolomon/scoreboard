@@ -13,7 +13,6 @@
       <span class="serve"><a href="/menu"><img class={ show: players.red.serve } src="/images/bat.svg" alt="service"></a></span>
     </div>
   </div>
-
   <script>
 
     this.players = opts.players;
@@ -29,8 +28,7 @@
          score = score + this.players.blue.score + " to " + this.players.red.score;
       else 
          score = score + this.players.red.score + " to " + this.players.blue.score; 
-      var msg = new SpeechSynthesisUtterance(score);
-      window.speechSynthesis.speak(msg);
+      responsiveVoice.speak(score);
       this.update();
     }.bind(this));
 

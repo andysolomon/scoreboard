@@ -105,7 +105,13 @@ class Scoreboard < Sinatra::Base
   end
 
   def push_scores
+    tries ||= 10
     Pusher['scores'].trigger('update_scores', match.scores.to_json)
+  rescue Pusher::HTTPError => e
+    retry unless (tries -= 1).zero?
+    puts ("Retry pusher")
+  else
+    puts ("Pusher ok")
   end
 
   def upload
