@@ -13,7 +13,7 @@ require 'redis-objects'
 require 'aws-sdk'
 
 require 'connection_pool'
-redis_url = ENV['REDIS_URL']
+redis_url = 'redis://redistogo:0dd1716645bef7fe0050bd2c33497d46@sculpin.redistogo.com:9484/'
 Redis::Objects.redis = ConnectionPool.new(size: 5, timeout: 5) { Redis.new(url: redis_url) }
 
 require './lib/match'
